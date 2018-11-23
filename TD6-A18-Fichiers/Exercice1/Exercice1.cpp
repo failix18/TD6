@@ -43,21 +43,82 @@ wstring lireWstring(istream& fichier)
 }
 
 #pragma endregion//}
+void ajouterFilm(ListeFilms liste,Film* film) 
+{
+	//TODO: Une fonction pour ajouter un Film à une ListeFilms, le film existant déjà; on veut uniquement ajouter le pointeur vers le film existant.  Vous pouvez vous inspirer de votre fonction du TD5.  Cette fonction ne doit copier aucun Film ni Acteur, elle doit copier uniquement des pointeurs.
+	ListeFilms listeGrand;
+	
 
-//TODO: Une fonction pour ajouter un Film à une ListeFilms, le film existant déjà; on veut uniquement ajouter le pointeur vers le film existant.  Vous pouvez vous inspirer de votre fonction du TD5.  Cette fonction ne doit copier aucun Film ni Acteur, elle doit copier uniquement des pointeurs.
 
-//TODO: Une fonction pour enlever un Film d'une ListeFilms (enlever le pointeur) sans effacer le film; la fonction prenant en paramètre un pointeur vers le film à enlever.  L'ordre des films dans la liste n'a pas à être conservé.  Encore une fois, vous pouvez vous inspirer de votre fonction du TD5.
+	if (liste.capacite == liste.nElements || liste.nElements > 0) {
+		ListeFilms listeGrand;
+		listeGrand.capacite = (liste.capacite) * 2;
+		
+		for (int i = 0; i < liste.nElements; i++) 
+			listeGrand.elements[i] = liste.elements[i];
+	}
+	liste.elements[liste.nElements] = film;
+	liste.nElements++;
 
-//TODO: Une fonction pour trouver un Acteur par son nom dans une ListeFilms, qui retourne un pointeur vers l'acteur, ou nullptr si l'acteur n'est pas trouvé.
+
+
+}
+
+
+void enleverFilm(ListeFilms liste, Film* film)
+{
+	//TODO: Une fonction pour enlever un Film d'une ListeFilms (enlever le pointeur) sans effacer le film; la fonction prenant en paramètre un pointeur vers le film à enlever.  L'ordre des films dans la liste n'a pas à être conservé.  Encore une fois, vous pouvez vous inspirer de votre fonction du TD5.
+	for (int i = 0; i < liste.nElement - 1; i++){
+		if(film.titre==liste.elements[i].titre){
+			for(int j=i; j<liste.nElements -1;j++){
+				liste.elements[j] = liste.elements[j + 1];
+			}
+			liste.nElements--;
+		}
+
+	}
+	if (film == liste.elements[liste.nElements-1]) {
+		liste.nElements--;
+
+		}
+
+}
+
+
+
+Acteur* trouverActeur(ListeFilms liste, Acteur acteur)
+{
+	//TODO: Une fonction pour trouver un Acteur par son nom dans une ListeFilms, qui retourne un pointeur vers l'acteur, ou nullptr si l'acteur n'est pas trouvé.
+	Acteur* ptrActeur = nullptr;
+	for (int i = 0; i < liste.nElements; i++)
+		for (int j = 0; j < liste.elements[i]->acteurs.nElements; j++) 
+			if (liste.elements[i]->acteurs.elements[j]->nom == acteur.nom)
+				ptrActeur = liste.elements[i]->acteurs.elements[j];
+	return ptrActeur;
+}
 
 //TODO: Compléter les fonctions pour lire le fichier et créer/allouer une ListeFilms.  La ListeFilms devra être passée entre les fonctions, pour vérifier l'existence d'un Acteur avant de l'allouer à nouveau (cherché par nom en utilisant la fonction ci-dessus).
-Acteur* lireActeur(istream& fichier)
+Acteur* lireActeur(istream& fichier, ListeFilms liste)
 {
 	Acteur acteur = {};
 	acteur.nom            = lireWstring(fichier);
 	acteur.anneeNaissance = lireUint16 (fichier);
 	acteur.sexe           = lireUint8  (fichier);
-	return {}; //TODO: Retourner un pointeur soit vers un acteur existant ou un nouvel acteur ayant les bonnes informations, selon si l'acteur existait déjà.  Pour fins de débogage, affichez les noms des acteurs crées; vous ne devriez pas voir le même nom d'acteur affiché deux fois pour la création.
+
+
+
+	Acteur* acteurBon;
+	acteurBon = trouverActeur(liste, acteur);
+	if (acteurBon == nullptr){
+		acteurBon = new Acteur;
+		*acteurBon = acteur;
+		return acteurBon;
+		wcout << "Le nom du nouvelle acteur est: " << acteur.nom; 
+	}else{
+		return acteurBon;
+	}
+
+	 //TODO: Retourner un pointeur soit vers un acteur existant ou un nouvel acteur ayant les bonnes informations, selon si l'acteur existait déjà.  Pour fins de débogage, affichez les noms des acteurs crées; vous ne devriez pas voir le même nom d'acteur affiché deux fois pour la création.
 }
 
 Film* lireFilm(istream& fichier)
