@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="IBM850"?>
+<!-- Quelques rŠgles pour cppcheck.
+	Par Francois-R.Boyer@PolyMtl.ca
+	
+	Des rŠgles tentent de v‚rifier les erreurs communes suivantes:
+		- Les ';' causant des instructions vides, par exemple "while(x);" pourrait ˆtre une erreur. On propose d'utiliser "while(x) { }" dans le cas o— une boucle vide est vraiment voulue.
+		- Un 'for' doit utiliser la variable initialis‚e dans le test et dans l'incr‚mentation.  Il arrive souvent de faire un copier-coller et d'oublier de changer une des variables, cette v‚rification pourra g‚n‚ralement le d‚tecter.
+	
+	Cppcheck passe chaque rŠgle sur le fichier en entier avant de passer la rŠgle suivante, dans l'ordre de ce fichier, aprŠs avoir pass‚ les rŠgles internes de cppcheck.
+	
+	NOTE: Il y a des problŠmes avec les accents, selon quel programme affiche le r‚sultat de cppcheck.
+		Sur la console, il plante aprŠs le premier affichage avec accents en UTF-8 (avec "chcp 65001"), alors que ‡a fonctionne en ISO-8859-1 (avec "chcp 1252").
+		Dans Notepad++, il faut du UTF-8 et ‡a fonctionne.
+		VisualStudio 2008 s'attend … du Latin1 dans les Tools et … du OEM850 dans les build events.
+-->
+
+<!-- ****************** RŠgles pour les erreurs communes ****************** -->
+
+<rule version="1">
+<pattern>{ ; }</pattern>
+<message>
+<id>emptyStatement</id>
+<severity>warning</severity>
+<summary>';' donnant une instruction vide; si l'instruction vide est voulue, utiliser plut“t des accolades vides { }, sinon enlever le ';'.  [FRB]</summary>
+</message>
+</rule>
+
+<rule version="1">
+<pattern>for \([^;]* ([a-zA-Z_][a-zA-Z0-9_]*) = [^;]*;(?![^;]* \1 [^;]*;)[^;]*</pattern>
+<message>
+<id>variablesNotMatching</id>
+<severity>warning</severity>
+<summary>La comparaison du 'for' ne teste pas la variable initialis‚e.  [FRB]</summary>
+</message>
+</rule>
+
+<rule version="1">
+<pattern>for \([^;]* ([a-zA-Z_][a-zA-Z0-9_]*) = [^;]*;[^;]*;(?![^{]* \1 [^{]*\{)[^{]*</pattern>
+<message>
+<id>variablesNotMatching</id>
+<severity>warning</severity>
+<summary>L'incr‚mentation du 'for' n'affecte pas la variable initialis‚e.  [FRB]</summary>
+</message>
+</rule>

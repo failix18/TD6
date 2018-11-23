@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Property page for Cppcheck VS2013 add-on.
+	By Francois-R.Boyer@PolyMtl.ca
+	2014-10-20
+-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+	<!-- Add some properties, in a new page, but associated with existing ClCompile project items. -->
+	<!-- To avoid name collisions, we prepend Cppcheck_ to the names of the added properties. -->
+	<Rule Name="Cppcheck" PageTemplate="tool" DisplayName="Analyse Cppcheck" SwitchPrefix="--" Order="10">
+		<Rule.Categories>
+			<Category Name="General" DisplayName="Général"/>
+		</Rule.Categories>
+		<Rule.DataSource>
+			<DataSource Persistence="ProjectFile" ItemType="ClCompile" Label="" HasConfigurationCondition="true"/>
+		</Rule.DataSource>
+		<!-- <StringProperty Name="Cppcheck_Inputs" IsRequired="true" Visible="False" IncludeInCommandLine="False" /> -->
+		<BoolProperty Name="Cppcheck_DoCppcheck" DisplayName="Vérifier avec Cppcheck" Description="Cppcheck ne sera pas appelé si cette option est désactivée." Category="General" IncludeInCommandLine="False" />
+		<StringListProperty Name="Cppcheck_SuppressChecks" DisplayName="Ne pas avertir pour" Description="Liste les avertissements à ignorer sous la forme [error id]:[filename]:[line] où le [filename] et [line] sont optionnels. Mettre des ; entre les éléments de la liste." Category="General" Switch="suppress=" />
+		<StringListProperty Subtype="file" Name="Cppcheck_RuleFiles" DisplayName="Fichiers de règles" Description="Spécifie un ou plusieurs fichiers de règles supplémentaires.     (--rule-file=[name])" Category="General" Switch="rule-file=" />
+		<BoolProperty Name="Cppcheck_XmlOutput" DisplayName="Affichage en XML" Description="Donne la sortie en XML plutôt qu'en texte. Permet de savoir les identificateurs des avertissements." Category="General" Switch="xml" />
+		<StringProperty Name="Sources" IsRequired="true" Visible="False" IncludeInCommandLine="False" />
+	</Rule>
+</ProjectSchemaDefinitions>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Default properties for Cppcheck VS2013 add-on.
+	By Francois-R.Boyer@PolyMtl.ca
+	2014-10-20
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!-- Based on MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations\masm.props -->
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<!-- Change some default cl options -->
+			<Optimization>Disabled</Optimization>
+			<WarningLevel>Level4</WarningLevel>
+			
+			<!-- Cppcheck options -->
+			<Cppcheck_DoCppcheck>true</Cppcheck_DoCppcheck>
+			<Cppcheck_SuppressChecks>missingIncludeSystem;unusedFunction;unmatchedSuppression</Cppcheck_SuppressChecks>
+			<Cppcheck_RuleFiles>$(MSBuildThisFileDirectory)frboyer.rule</Cppcheck_RuleFiles>
+			<Cppcheck_XmlOutput>false</Cppcheck_XmlOutput>
+			
+			<Cppcheck_CommandLineTemplate>"$(MSBuildThisFileDirectory)cppcheck_vs.bat" --enable=all --inconclusive --inline-suppr [AllOptions] [Sources]</Cppcheck_CommandLineTemplate>
+		</ClCompile>
+	</ItemDefinitionGroup>
+</Project>
