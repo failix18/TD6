@@ -46,30 +46,37 @@ wstring lireWstring(istream& fichier)
 void ajouterFilm(ListeFilms liste,Film* film) 
 {
 	//TODO: Une fonction pour ajouter un Film à une ListeFilms, le film existant déjà; on veut uniquement ajouter le pointeur vers le film existant.  Vous pouvez vous inspirer de votre fonction du TD5.  Cette fonction ne doit copier aucun Film ni Acteur, elle doit copier uniquement des pointeurs.
-	ListeFilms listeGrand;
-	
-
 
 	if (liste.capacite == liste.nElements || liste.nElements > 0) {
-		ListeFilms listeGrand;
-		listeGrand.capacite = (liste.capacite) * 2;
+		ListeFilms listeTampon;
+		listeTampon.capacite = (liste.capacite);
+		listeTampon.nElements = liste.nElements;
 		
 		for (int i = 0; i < liste.nElements; i++) 
-			listeGrand.elements[i] = liste.elements[i];
+			listeTampon.elements[i] = liste.elements[i];
+
+		delete liste.elements;
+		liste.elements = nullptr;
+		liste.capacite = 0;
+		liste.nElements = 0;
+
+		ListeFilms liste;
+		liste.elements = new Film*[listeTampon.capacite*2];
+		liste.capacite = listeTampon.capacite * 2;
+		liste.nElements = listeTampon.nElements;
 	}
+
 	liste.elements[liste.nElements] = film;
 	liste.nElements++;
-
-
-
 }
 
 
 void enleverFilm(ListeFilms liste, Film* film)
 {
+	liste.elements[3]->titre;
 	//TODO: Une fonction pour enlever un Film d'une ListeFilms (enlever le pointeur) sans effacer le film; la fonction prenant en paramètre un pointeur vers le film à enlever.  L'ordre des films dans la liste n'a pas à être conservé.  Encore une fois, vous pouvez vous inspirer de votre fonction du TD5.
-	for (int i = 0; i < liste.nElement - 1; i++){
-		if(film.titre==liste.elements[i].titre){
+	for (int i = 0; i < liste.nElements - 1; i++){
+		if(film->titre == liste.elements[i]->titre ){
 			for(int j=i; j<liste.nElements -1;j++){
 				liste.elements[j] = liste.elements[j + 1];
 			}
@@ -129,8 +136,9 @@ Film* lireFilm(istream& fichier)
 	film.anneeSortie = lireUint16 (fichier);
 	film.recette     = lireUint16 (fichier);
 	film.acteurs.nElements = lireUint8 (fichier);  //NOTE: Vous avez le droit d'allouer d'un coup le tableau pour les acteurs, sans faire de réallocation comme pour ListeFilms.  Vous pouvez aussi copier-coller les fonctions d'allocation de ListeFilms ci-dessus dans des nouvelles fonctions et faire un remplacement de Film par Acteur, pour réutiliser cette réallocation.
+	
 	for (int i = 0; i < film.acteurs.nElements; i++) {
-		lireActeur(fichier); //TODO: Placer l'acteur au bon endroit dans les acteurs du film.
+		film.lireActeur(fichier); //TODO: Placer l'acteur au bon endroit dans les acteurs du film.
 		//TODO: Ajouter le film aux films dans lesquels l'acteur joue.
 	}
 	return {}; //TODO: Retourner le pointeur vers le nouveau film.
