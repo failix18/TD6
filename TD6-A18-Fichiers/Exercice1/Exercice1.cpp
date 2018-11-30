@@ -159,7 +159,13 @@ ListeFilms creerListe(string nomFichier)
 	return {}; //TODO: Retourner la liste de films.
 }
 
-//TODO: Une fonction pour détruire un film (relâcher toute la mémoire associée à ce film, et les acteurs qui ne jouent plus dans aucun films de la collection).  Noter qu'il faut enleve le film détruit des films dans lesquels jouent les acteurs.  Pour fins de débogage, affichez les noms des acteurs lors de leur destruction.
+void detruireFilm() {
+	//TODO: Une fonction pour détruire un film (relâcher toute la mémoire associée à ce film, et les acteurs qui ne jouent plus dans aucun films de la collection).  Noter qu'il faut enleve le film détruit des films dans lesquels jouent les acteurs.  Pour fins de débogage, affichez les noms des acteurs lors de leur destruction.
+
+
+}
+
+
 
 //TODO: Une fonction pour détruire une ListeFilms et tous les films qu'elle contient.
 
