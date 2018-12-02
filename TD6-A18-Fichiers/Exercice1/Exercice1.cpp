@@ -60,12 +60,12 @@ void ajouterFilm(ListeFilms& liste,Film* film)
 		liste.capacite = 0;
 		liste.nElements = 0;
 
-		liste.elements = new Film*[listeTampon.capacite*2];
+		liste.elements = new Film*[listeTampon.capacite*2]; ///////////////// on devrait pas mettre une exeption si la liste est de grandeur zero???? pcq sinon 0*2 =0
 		liste.capacite = listeTampon.capacite * 2;
 		liste.nElements = listeTampon.nElements;
 	}
 
-	liste.elements[liste.nElements] = film;
+	liste.elements[liste.nElements] = film; 
 	liste.nElements++;
 }
 
@@ -142,6 +142,7 @@ Film* lireFilm(istream& fichier, ListeFilms& liste)
 	for (int i = 0; i < film.acteurs.nElements; i++) {
 		acteur= lireActeur(fichier, liste); //TODO: Placer l'acteur au bon endroit dans les acteurs du film.
 		film.acteurs.elements[i] = acteur;
+		liste.nElements++;
 		//TODO: Ajouter le film aux films dans lesquels l'acteur joue.
 		ajouterFilm(acteur->joueDans, &film);
 	}
@@ -154,7 +155,7 @@ void creerListe(string nomFichier, ListeFilms& liste)
 	fichier.exceptions(ios::failbit);
 	
 	int nElements = lireUint16(fichier);
-
+	
 	//TODO: Créer une liste de films vide.
 	ListeFilms listeFilm = {};
 	Film* film;
@@ -307,6 +308,9 @@ int main()
 
 	//TODO: Lire le fichier binaire en allouant la mémoire nécessaire.  Devrait afficher les noms de 20 acteurs sans doublons (par l'affichage pour fins de débogage dans votre fonction lireActeur).
 	ListeFilms liste;
+	liste.capacite = 2;
+	liste.nElements = 0;
+	liste.elements = new Film*[2];
 	creerListe("films.bin", liste);
 	
 
