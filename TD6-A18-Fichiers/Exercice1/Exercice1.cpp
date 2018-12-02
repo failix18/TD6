@@ -148,7 +148,7 @@ Film* lireFilm(istream& fichier, ListeFilms& liste)
 	return &film ; //TODO: Retourner le pointeur vers le nouveau film.
 }
 
-ListeFilms creerListe(string nomFichier, ListeFilms& liste)
+void creerListe(string nomFichier, ListeFilms& liste)
 {
 	ifstream fichier(nomFichier, ios::binary);
 	fichier.exceptions(ios::failbit);
@@ -164,7 +164,7 @@ ListeFilms creerListe(string nomFichier, ListeFilms& liste)
 		ajouterFilm(listeFilm, film ); //TODO: Ajouter le film à la liste.
 	}
 	
-	return listeFilm; //TODO: Retourner la liste de films.
+	//TODO: Retourner la liste de films.
 }
 
 void detruireFilm( Film* film) {
@@ -293,6 +293,7 @@ void testCppcheck()
 */
 
 int main()
+
 {
 	initDebogageMemoire(); // Affichera dans la "Sortie" de VisualStudio les fuites de mémoire, si exécuté avec débogage.
 	initUnicode(); // Permet d'afficher des caractères Unicode (pas seulement les accents latin).
@@ -305,7 +306,11 @@ int main()
 	//TODO: Chaque TODO dans cette fonction devrait se faire en 1 ou 2 lignes, en appelant les fonctions écrites.
 
 	//TODO: Lire le fichier binaire en allouant la mémoire nécessaire.  Devrait afficher les noms de 20 acteurs sans doublons (par l'affichage pour fins de débogage dans votre fonction lireActeur).
+	ListeFilms liste;
+	creerListe("films.bin", liste);
 	
+
+
 	wcout << LIGNE_DE_SEPARATION << L"Le premier film de la liste est:" << endl;
 	//TODO: Afficher le premier film de la liste.  Devrait être Alien.
 	
