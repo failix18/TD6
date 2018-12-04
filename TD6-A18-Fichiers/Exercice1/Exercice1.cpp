@@ -198,18 +198,18 @@ void detruireFilm(ListeFilms& liste, Film* film) {
 	for (int i = 0; i < film->acteurs.nElements; i++) {
 		enleverFilm(film->acteurs.elements[i]->joueDans, film);
 		if (film->acteurs.elements[i]->joueDans.nElements == 0) {
-			wcout << film->acteurs.elements[i]->nom;
+			wcout << film->acteurs.elements[i]->nom<<endl;
 			delete film->acteurs.elements[i];
-			film->acteurs.elements[i]->nom = nullptr;
-			film->acteurs.elements[i]->anneeNaissance = 0;
-			film->acteurs.elements[i]->sexe = 0;
+			film->acteurs.elements[i] = nullptr;
+			//film->acteurs.elements[i]->anneeNaissance = 0;
+			//film->acteurs.elements[i]->sexe = 0;
 		}
 	}
 	enleverFilm(liste, film);
-	film->titre = nullptr;
-	film->realisateur = nullptr;
-	film->anneeSortie = 0;
-	film->recette = 0;
+	film = nullptr;
+	//film->realisateur = nullptr;
+	//film->anneeSortie = 0;
+	//film->recette = 0;
 	delete film;
 }
 
