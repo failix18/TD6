@@ -176,12 +176,9 @@ ListeFilms creerListe(string nomFichier)
 	ListeFilms liste;
 	liste.capacite = 0;
 
-	Film*  film;
-
 	//TODO: Créer une liste de films vide.
 	for (int i = 0; i < nElements; i++) {
-		film = lireFilm(fichier, liste); //TODO: Ajouter le film à la liste.
-		ajouterFilm(liste, film);
+		ajouterFilm(liste, lireFilm(fichier, liste));
 	}
 
 	return liste; //TODO: Retourner la liste de films.
@@ -197,12 +194,12 @@ void detruireFilm(ListeFilms& liste, Film* film) {
 			delete film->acteurs.elements[i];
 			film->acteurs.elements[i] = nullptr;
 			//film->acteurs.elements[i]->anneeNaissance = 0;
-			//film->acteurs.elements[i]->sexe = 0;
+			//film->acteurs.elements[i]->sexe = 0;///////////////////////////////////////
 		}
 	}
 	enleverFilm(liste, film);
 	film = nullptr;
-	//film->realisateur = nullptr;
+	//film->realisateur = nullptr;//////////////////////////////
 	//film->anneeSortie = 0;
 	//film->recette = 0;
 	delete film;
@@ -253,8 +250,7 @@ void afficherListeFilm(ListeFilms listeFilm) {
 	 	
 }
 
-
-
+ 
 int main()
 
 {
