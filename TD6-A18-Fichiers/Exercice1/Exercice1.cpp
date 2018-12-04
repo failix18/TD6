@@ -130,22 +130,17 @@ Acteur* lireActeur(istream& fichier, ListeFilms& liste)
 	Acteur* acteurBon;
 
 	acteurBon = trouverActeur(liste, acteur.nom);
-	
 
 	if (acteurBon == nullptr) {
 		acteurBon = new Acteur;
 		*acteurBon = acteur;
-		acteurBon->joueDans;
 		acteurBon->joueDans.capacite = 0;
 
 		wcout << "Le nom de l'acteur est: " << acteurBon->nom << endl;
 	}
 
 	return acteurBon;
-
-
-
-
+	   
 }
 
 Film* lireFilm(istream& fichier, ListeFilms& liste)
