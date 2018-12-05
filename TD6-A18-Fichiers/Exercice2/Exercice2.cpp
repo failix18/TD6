@@ -1,3 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file    Exercice2.cpp
+/// \author  Félix Dumont(1954787) et Mark Weber-Sadler(1947609)
+/// \version 2018-12-4
+///
+/// Ce programme lit un nombre décimal en string et le convertie en double, et lit un nombre hexadecimal en string et le convertie en double. Ensuite le programme additione ces deux nombres et affiche le résultat en hexadécimal.
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 #include <iostream>
 #include <string>
 #include <cmath>

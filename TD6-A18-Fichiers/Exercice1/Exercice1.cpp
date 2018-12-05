@@ -1,4 +1,13 @@
-﻿#pragma region "Includes"//{
+﻿////////////////////////////////////////////////////////////////////////////////
+/// \file    Exercice2.cpp
+/// \author  Félix Dumont(1954787) et Mark Weber-Sadler(1947609)
+/// \version 2018-12-4
+///
+/// Ce programme lit les acteurs et les film d'une collection et permet de connaitre dans quels films un acteur a joué et quels sont les acteurs qui ont joué dans un film. 
+////////////////////////////////////////////////////////////////////////////////
+
+
+#pragma region "Includes"//{
 #define _CRT_SECURE_NO_WARNINGS // On permet d'utiliser les fonctions de copies de chaînes qui sont considérées non sécuritaires.
 
 #include "structures.hpp"      // Structures de données pour la collection de films en mémoire.
@@ -295,5 +304,6 @@ int main()
 
 	//TODO: Détruire tout avant de terminer le programme.  Il ne devrait y avoir aucun message "Detected memory leaks!" dans la fenêtre de Sortie de VisualStudio.
 	detruireListeFilm(liste);
+	return 0;
 
-	}
+}
